@@ -1,0 +1,10 @@
+{
+  "name": "murecycleapp",
+  "displayName": "MU Recycle",
+  "theme": {
+    "primaryColor": "#2FA23F",
+    "secondColor": "#222222",
+    "thirdColor": "#F8F9F8",
+    "fourthColor": "#EEE"
+  }
+}

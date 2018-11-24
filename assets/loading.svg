@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="200" viewBox="0 0 160 200">
+    <style>
+@keyframes Mask_t { 0% { transform: translate(0px,0px) rotate(0deg); } 50% { transform: translate(1.230741px,-2.985108px) rotate(2deg); } 100% { transform: translate(0px,0px) rotate(0deg); } }
+@keyframes MU_t { 0% { transform: translate(0px,0px); } 50% { transform: translate(-2.164992px,-0.825655px); } 100% { transform: translate(0px,0px); } }
+@keyframes BIN_t { 0% { transform: translate(0px,0px); } 50% { transform: translate(-2.164992px,-0.825655px); } 100% { transform: translate(0px,0px); } }
+@keyframes Path-3_t { 0% { transform: translate(48.726923px,17.368421px) rotate(0deg) scaleY(-1) translate(-48.726923px,-17.368421px); } 50% { transform: translate(45.7559px,9.911838px) rotate(-8deg) scaleY(-1) translate(-48.726923px,-17.368421px); } 100% { transform: translate(48.7269px,17.3684px) rotate(0deg) scaleY(-1) translate(-48.726923px,-17.368421px); } }
+@keyframes qr-code_t { 0% { transform: translate(11.112956px,8.827044px) rotate(0deg); } 50% { transform: translate(7.572271px,5.829903px) rotate(-8deg); } 100% { transform: translate(11.113px,8.82704px) rotate(0deg); } }
+@keyframes Oval-3_t { 0% { transform: translate(83.192308px,13.421053px); } 50% { transform: translate(79.166454px,3.665587px); } 100% { transform: translate(83.192308px,13.421053px); } }
+@keyframes Oval-4_t { 0% { transform: translate(70px,173px); } 50% { transform: translate(66.324928px,174.5px); } 100% { transform: translate(70px,173px); } }
+    </style>
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path id="path-1" d="M0.614944,2.14511C2.44308,73.8031,4.49162,111.393,6.76055,114.914C10.1639,120.196,90.6618,120.196,94.4997,114.914C97.0583,111.393,98.0408,73.38,97.4473,0.875841L0.614944,2.14511Z"/>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(11.5413,18.2311)">
+        <g id="Login" transform="translate(-124,-94)">
+            <g id="Group-3" transform="translate(111,86)">
+                <ellipse id="Oval-5" fill="#E0E0E0" fill-rule="nonzero" rx="58.5" ry="6.5" transform="translate(0,0) translate(94.5,184.5)"/>
+                <g id="Group" transform="translate(0.561795,35.7051) rotate(-20)">
+                    <g id="Path-4" transform="translate(5.54615,41.2105)">
+                        <use id="Mask" fill="#2FA23F" fill-rule="nonzero" xlink:href="#path-1" style="animation: 1s linear infinite both Mask_t;"/>
+                    </g>
+                    <text id="MU" font-family="Arial" font-size="15" font-weight="bold" fill="#FFFFFF" style="animation: 1s linear infinite both MU_t;">
+                        <tspan x="40" y="142">MU</tspan>
+                    </text>
+                    <text id="BIN" font-family="Arial" font-size="15" font-weight="bold" fill="#FFFFFF" style="animation: 1s linear infinite both BIN_t;">
+                        <tspan x="67" y="142">BIN</tspan>
+                    </text>
+                    <g id="Group-2" fill-rule="nonzero" transform="translate(0.957308,17.18) rotate(-10)">
+                        <path id="Path-3" d="M0,0L97.4538,0C96.3177,17.8604,94.663,28.3463,92.4896,31.4577C89.2295,36.1247,7.61715,35.5248,4.70335,31.4577C2.76081,28.7463,1.19303,18.2604,0,0Z" fill="#10691C" transform="translate(48.7269,17.3684) scale(1,-1) translate(-48.7269,-17.3684)" style="animation: 1s linear infinite both Path-3_t;"/>
+                        <g id="qr-code" fill="#FFFFFF" transform="translate(11.113,8.82704)" style="animation: 1s linear infinite both qr-code_t;">
+                            <path id="Shape" d="M6.33846,0L0,0L0,6.31579L6.33846,6.31579L6.33846,0ZM5.07077,5.05263L1.26769,5.05263L1.26769,1.26316L5.07077,1.26316L5.07077,5.05263Z"/>
+                            <path id="Rectangle-path" d="M3.16923,3.15789L6.33846,3.15789L6.33846,6.31579L3.16923,6.31579Z"/>
+                            <path id="Shape-2" d="M12.6769,0L12.6769,6.31579L19.0154,6.31579L19.0154,0L12.6769,0ZM17.7477,5.05263L13.9446,5.05263L13.9446,1.26316L17.7477,1.26316L17.7477,5.05263Z"/>
+                            <path id="Rectangle-path-2" d="M15.8462,3.15789L19.0154,3.15789L19.0154,6.31579L15.8462,6.31579Z"/>
+                            <path id="Shape-3" d="M0,18.9474L6.33846,18.9474L6.33846,12.6316L0,12.6316L0,18.9474ZM1.26769,13.8947L5.07077,13.8947L5.07077,17.6842L1.26769,17.6842L1.26769,13.8947Z"/>
+                            <path id="Rectangle-path-3" d="M3.16923,15.7895L6.33846,15.7895L6.33846,18.9474L3.16923,18.9474Z"/>
+                            <path id="Rectangle-path-4" d="M9.50769,0L12.6769,0L12.6769,3.15789L9.50769,3.15789Z"/>
+                            <path id="Shape-4" d="M9.50769,6.31579L11.0923,6.31579L11.0923,5.26316L12.6769,5.26316L12.6769,4.21053L7.92308,4.21053L7.92308,3.15789L6.33846,3.15789L6.33846,4.21053L6.33846,4.73684L6.33846,5.26316L9.50769,5.26316Z"/>
+                            <path id="Rectangle-path-5" d="M6.33846,6.31579L9.50769,6.31579L9.50769,9.47368L6.33846,9.47368Z"/>
+                            <path id="Shape-5" d="M12.6769,6.31579L11.0923,6.31579L11.0923,7.89474L6.33846,7.89474L6.33846,9.47368L12.6769,9.47368Z"/>
+                            <path id="Shape-6" d="M1.58462,11.0526L3.16923,11.0526L3.16923,9.47368L1.58462,9.47368L1.58462,6.31579L0,6.31579L0,12.6316L1.58462,12.6316Z"/>
+                            <path id="Rectangle-path-6" d="M3.16923,6.31579L6.33846,6.31579L6.33846,9.47368L3.16923,9.47368Z"/>
+                            <path id="Shape-7" d="M6.97231,12.6316L9.50769,12.6316L9.50769,11.0526L8.24,11.0526L8.24,9.47368L5.70462,9.47368L5.70462,6.31579L4.43692,6.31579L4.43692,9.47368L3.16923,9.47368L3.16923,12.6316L4.43692,12.6316L4.43692,11.0526L5.07077,11.0526L5.70462,11.0526L6.97231,11.0526Z"/>
+                            <path id="Rectangle-path-7" d="M9.50769,9.47368L12.6769,9.47368L12.6769,12.6316L9.50769,12.6316Z"/>
+                            <path id="Shape-8" d="M10.1415,12.6316L6.33846,12.6316L6.33846,13.8947L8.87385,13.8947L8.87385,17.6842L6.33846,17.6842L6.33846,18.9474L10.1415,18.9474L10.1415,17.6842L12.6769,17.6842L12.6769,16.4211L10.1415,16.4211Z"/>
+                            <path id="Rectangle-path-8" d="M6.33846,15.7895L9.50769,15.7895L9.50769,18.9474L6.33846,18.9474Z"/>
+                            <path id="Rectangle-path-9" d="M12.6769,12.6316L15.8462,12.6316L15.8462,15.7895L12.6769,15.7895Z"/>
+                            <path id="Shape-9" d="M19.0154,15.7895L15.8462,15.7895L15.8462,18.9474L16.9026,18.9474L16.9026,16.8421L19.0154,16.8421Z"/>
+                            <path id="Rectangle-path-10" d="M15.8462,15.7895L19.0154,15.7895L19.0154,18.9474L15.8462,18.9474Z"/>
+                            <path id="Rectangle-path-11" d="M15.8462,12.6316L19.0154,12.6316L19.0154,15.7895L15.8462,15.7895Z"/>
+                            <path id="Shape-10" d="M14.2615,12.6316L15.8462,12.6316L15.8462,9.47368L12.6769,9.47368L12.6769,10.5263L14.2615,10.5263Z"/>
+                            <path id="Shape-11" d="M16.48,7.89474L15.2123,7.89474L15.2123,6.31579L13.9446,6.31579L13.9446,7.89474L12.6769,7.89474L12.6769,9.47368L17.7477,9.47368L17.7477,7.89474L19.0154,7.89474L19.0154,6.31579L16.48,6.31579Z"/>
+                            <path id="Rectangle-path-12" d="M15.8462,9.47368L19.0154,9.47368L19.0154,12.6316L15.8462,12.6316Z"/>
+                        </g>
+                        <ellipse id="Oval-3" fill="#074610" rx="7.13077" ry="7.10526" transform="translate(0,0) translate(83.1923,13.4211)" style="animation: 1s linear infinite both Oval-3_t;"/>
+                    </g>
+                </g>
+                <ellipse id="Oval-4" fill="#10691C" fill-rule="nonzero" rx="10" ry="10" transform="translate(0,0) translate(70,173)" style="animation: 1s linear infinite both Oval-4_t;"/>
+            </g>
+        </g>
+    </g>
+</svg>
