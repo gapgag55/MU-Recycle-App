@@ -7,15 +7,20 @@ import language from './language';
 
 import Map from './containers/map.js';
 import Notify from './containers/notify.js';
+
 import Bin from './containers/bin.js';
+import ReceiveTrash from './containers/receiveTrash.js';
+import ReceiveSuccess from './containers/receiveSuccess.js';
+
 import News from './containers/news.js';
 import Account from './containers/account.js';
 import Transfer from './containers/transfer.js';
+import TransferInput from './containers/transferInput.js';
+import TransferSuccess from './containers/transferSuccess.js';
 
 import AuthLoading from './containers/authLoading';
 import Login from './containers/login.js';
 import Register from './containers/register.js';
-import SuccessBin from './containers/successBin.js';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -37,8 +42,10 @@ const AuthStack = createStackNavigator({
 const MapStack = createStackNavigator({
   Map,
   Transfer,
+  TransferInput,
+  TransferSuccess,
 }, {
-  mode: 'modal',
+  initialRouteName: 'Map',
   headerMode: 'none',
 });
 
@@ -47,17 +54,23 @@ const BinStack = createStackNavigator({
     screen: Bin,
     navigationOptions: () => ({
       tabBarLabel: () => { },
-      header: null
     })
   },
-  SuccessBin: {
-    screen: SuccessBin,
+  ReceiveTrash: {
+    screen: ReceiveTrash,
+    navigationOptions: () => ({
+      tabBarLabel: () => { },
+    })
+  },
+  ReceiveSuccess: {
+    screen: ReceiveSuccess,
     navigationOptions: () => ({
       tabBarLabel: () => { },
     })
   },
 }, {
-  mode: 'modal',
+  initialRouteName: 'ReceiveTrash',
+  headerMode: 'none',
 });
 
 const TabNavigator = createBottomTabNavigator({
@@ -72,7 +85,7 @@ const TabNavigator = createBottomTabNavigator({
   [language["menu.notify"]]: Notify,
   [language["menu.account"]]: Account,
 }, {
-    initialRouteName: language["menu.account"],
+    initialRouteName: 'Bin',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
@@ -119,5 +132,5 @@ export default createAppContainer(createSwitchNavigator({
   AuthStack,
   TabNavigator
 }, {
-  initialRouteName: 'AuthLoading'
+  initialRouteName: 'TabNavigator'
 }));

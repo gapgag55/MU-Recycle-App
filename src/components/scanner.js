@@ -6,7 +6,7 @@ class Scanner extends Component {
   render() {
     return (
       <QRCodeScanner
-        onRead={this.props.onRead()}
+        onRead={({data}) => this.props.onRead(data)}
         cameraStyle={styles.cameraContainer}
         showMarker={true}
         customMarker={<Image source={require('../../assets/scanqr.png')} />}

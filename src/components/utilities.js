@@ -79,7 +79,7 @@ export const BoxTitle = styled.Text`
  */
 export const Line = styled.View`
   height: 1px;
-  width: 90%;
+  width: 100%;
   background-color: ${theme.fourthColor};
   margin: 20px 0;
 `;
@@ -89,14 +89,16 @@ export const Title = styled.Text`
   font-family: Prompt-Medium;
 `;
 
+export const TitleGreen = styled.Text`
+  font-size: 35px;
+  font-family: Prompt-Medium;
+  color: ${theme.primaryColor};
+`;
+
 export const PointText = styled.Text`
   font-size: 17px;
   font-family: Prompt-Regular;
   margin-left: 10px;
-`;
-
-export const SuccessText = styled(Title)`
-  color: ${theme.primaryColor};
 `;
 
 export const Message = styled.Text`

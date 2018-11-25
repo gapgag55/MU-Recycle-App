@@ -9,37 +9,40 @@ import {
   StyledTextInput,
   StyledButton,
   StyledButtonText,
-  StyledButtonSmall,
-  StyledButtonTextSmall,
   Container
 } from '../components/utilities';
+import Close from '../components/close';
 
 class Register extends Component {
   onPress = () => {
-    const fullname = "Sarayut Lawilai";
+    // const fullname = "Sarayut Lawilai";
 
-    firebase.auth().createUserWithEmailAndPassword("imkopkap8@gmail.com", "Kopkap123456!")
-    .then(({user}) => {
-      console.log(user);
-      const {email} = user._user;
-      const userRef = firebase.database().ref(`/users/${user.uid}`)
-      userRef.set({
-        email,
-        fullname,
-        point: 0.00,
-        type: 'user',
-      });
+    // firebase.auth().createUserWithEmailAndPassword("imkopkap8@gmail.com", "Kopkap123456!")
+    // .then(({user}) => {
+    //   console.log(user);
+    //   const {email} = user._user;
+    //   const userRef = firebase.database().ref(`/users/${user.uid}`)
+    //   userRef.set({
+    //     email,
+    //     fullname,
+    //     point: 0.00,
+    //     type: 'user',
+    //   });
 
-      AsyncStorage.setItem('userToken', user._user.refreshToken)
+    //   AsyncStorage.setItem('userId', user._user.refreshToken)
+    
+
+    // SET TO REDUX
+
       this.props.navigation.navigate('TabNavigator');
-    })
-    .catch((error) => {
-      const { code, message } = error;
-      console.log(error)
-      // For details of error codes, see the docs
-      // The message contains the default Firebase string
-      // representation of the error
-    });
+    // })
+    // .catch((error) => {
+    //   const { code, message } = error;
+    //   console.log(error)
+    //   // For details of error codes, see the docs
+    //   // The message contains the default Firebase string
+    //   // representation of the error
+    // });
   }
 
   onClose = () => {
@@ -49,13 +52,7 @@ class Register extends Component {
   render() {
     return (
       <Container>
-        <TouchableHighlight 
-          style={styles.close}
-          onPress={this.onClose}
-          underlayColor="#ffffff00"
-        >
-          <Icon name="x" size={30} />
-        </TouchableHighlight>
+        <Close onClose={this.onClose} />
         <Image style={styles.logo} source={Logo} />
         <StyledTextInput
           placeholder="อีเมล:"
@@ -82,11 +79,6 @@ class Register extends Component {
 const styles = StyleSheet.create({
   logo: {
     marginBottom: 40,
-  },
-  close: {
-    position: 'absolute',
-    top: '10%',
-    right: 30
   }
 });
 

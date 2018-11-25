@@ -17,7 +17,9 @@ class Login extends Component {
   onPress = () => {
     firebase.auth().signInWithEmailAndPassword("imkopkap2@gmail.com", "Kopkap123456!")
     .then(({user}) => {
-      AsyncStorage.setItem('userToken', user._user.refreshToken)
+      // Send uid to redux to get full information
+
+      AsyncStorage.setItem('userId', user._user.refreshToken)
       this.props.navigation.navigate('TabNavigator');
     });
   }
