@@ -61,8 +61,8 @@ class ReceiveSuccess extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <TitleGreen>สำเร็จ</TitleGreen>
-        <StyledText>คุณได้รับแต้มเข้าสู่กระเป๋าเรียบร้อย</StyledText>
+        <TitleGreen>Success</TitleGreen>
+        <StyledText>Your points are now ready to use</StyledText>
         <Line />
         <Point
           style={{ width: 40, height: 41 }}

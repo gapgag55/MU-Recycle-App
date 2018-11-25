@@ -69,8 +69,8 @@ class ReceiveTrash extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <Title>การทำรายการ</Title>
-        <StyledText>ทิ้งขยะตามความเหมาะสม</StyledText>
+        <Title>BIN IS READY</Title>
+        <StyledText>Please put in the recyclable trash</StyledText>
         <Line />
         {(items.length == 0) ?
           <Image source={require('../../assets/logo.png')} /> :
@@ -86,7 +86,7 @@ class ReceiveTrash extends Component {
               onPress={this.onConfirm}
             >
               <StyledButtonText>
-                ยันยืน
+                Confirm
               </StyledButtonText>
             </StyledButton>
           </View>
