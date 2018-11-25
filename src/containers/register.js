@@ -55,21 +55,21 @@ class Register extends Component {
         <Close onClose={this.onClose} />
         <Image style={styles.logo} source={Logo} />
         <StyledTextInput
-          placeholder="อีเมล:"
+          placeholder="Email:"
           placeholderTextColor={theme.secondColor}
         />
         <StyledTextInput
-          placeholder="รหัสผ่าน:"
+          placeholder="Password:"
           placeholderTextColor={theme.secondColor}
         />
         <StyledTextInput
-          placeholder="ชื่อ-นามสกุล:"
+          placeholder="Name:"
           placeholderTextColor={theme.secondColor}
         />
         <StyledButton
           onPress={this.onPress}
         >
-          <StyledButtonText>สมัครสมาชิก</StyledButtonText>
+          <StyledButtonText>Register</StyledButtonText>
         </StyledButton>
       </Container>
     );

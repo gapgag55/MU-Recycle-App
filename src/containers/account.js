@@ -3,7 +3,6 @@ import { View, StyleSheet, Text } from 'react-native';
 import firebase from 'react-native-firebase';
 import QRCode from 'react-native-qrcode';
 
-import { theme } from '../../app.json';
 import {
   Container,
   Title,
@@ -56,7 +55,7 @@ class Account extends Component {
           onPress={this.logout}
         >
           <StyledButtonText>
-            ออกจากระบบ
+            Logout
           </StyledButtonText>
         </StyledButton>
       </Container>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   text: {
-    fontFamily: 'Prompt-regular'
+    fontFamily: 'Roboto-Regular'
   }
 });
 

@@ -24,15 +24,15 @@ class TransferSuccess extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <TitleGreen>สำเร็จ</TitleGreen>
-        <Text style={styles.font}>คุณได้ทำการโอนแต้มเรียบร้อย</Text>
+        <TitleGreen>Success</TitleGreen>
+        <Text style={styles.font}>Your points have been transfered</Text>
         <Line />
-        <Text style={styles.font}>ผู้รับแต้ม</Text>
+        <Text style={{...styles.font, marginBottom: 10}}>Receiver</Text>
         <Title style={{
           marginBottom: 20,
           fontWeight: 'normal',
           fontSize: 20
-        }}>ธนกิตติ์ สาชาติ</Title>
+        }}>Tanakit Sachati</Title>
         <Point
           style={{ width: 40, height: 41 }}
           styleText={{ fontSize: 26 }}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   font: {
-    fontFamily: 'Prompt-regular'
+    fontFamily: 'Roboto-Regular',
   }
 });
 

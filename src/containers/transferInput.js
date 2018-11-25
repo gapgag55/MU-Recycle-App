@@ -61,9 +61,9 @@ class TransferInput extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <Title style={{marginBottom: 20}}>โอนแต้ม</Title>
+        <Title style={{marginBottom: 20}}>Point Transfer</Title>
         <View style={styles.flex}>
-          <Text style={styles.font}>แต้มของคุณ:</Text>
+          <Text style={styles.font}>Your points:</Text>
           <Point
             style={{ width: 30, height: 31 }}
             styleText={{ fontSize: 22 }}
@@ -71,21 +71,21 @@ class TransferInput extends Component {
           />
         </View>
         <Line />
-        <Text style={styles.font}>ผู้รับแต้ม</Text>
+        <Text style={styles.font}>Receiver</Text>
         <Title style={{
           marginBottom: 20,
           fontWeight: 'normal',
           fontSize: 25
         }}>{receiver.fullname}</Title>
         <StyledTextInput
-          placeholder="จำนวนแต้ม"
+          placeholder="Points"
         />
         <Line />
         <StyledButton
           onPress={this.onSubmit}
         >
           <StyledButtonText>
-            ยืนยัน
+            Confirm
           </StyledButtonText>
         </StyledButton>
       </Container>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   font: {
-    fontFamily: 'Prompt-regular'
+    fontFamily: 'Roboto-Regular'
   }
 });
 

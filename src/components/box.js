@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { Image, TouchableHighlight } from 'react-native';
+import { View, Image, TouchableHighlight } from 'react-native';
 
-import { BoxWrapper, BoxTitle } from './utilities';
+import { BoxTitle } from './utilities';
 
 class Box extends Component {
+  onPress = (content) => {
+    this.props.navigation.push('ReadNew', {content});
+  }
+
   render() {
+    const {content} = this.props;
+    const {title, date, photo} = content
     return (
-      <TouchableHighlight>
-        <BoxWrapper>
+      <TouchableHighlight
+        style={{ backgroundColor: '#FFF', marginBottom: 20 }}
+        onPress={() => this.onPress(content)}
+        underlayColor="#EEE"
+      >
+        <View>
           <Image
-            source={require('../../assets/blog/1.jpg')}
-            style={{ width: '100%', height: '100%' }}
+            source={{uri: photo}}
+            style={{ width: '100%', height: 180 }}
           />
-          <BoxTitle>MUIC Successfully Stages Open House 2018</BoxTitle>
-        </BoxWrapper>
+          <BoxTitle>{title}</BoxTitle>
+        </View>
       </TouchableHighlight>
     );
   }

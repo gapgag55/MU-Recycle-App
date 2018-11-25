@@ -64,7 +64,7 @@ class Map extends Component {
             onPress={this.transfer}
           >
             <StyledButtonText>
-              โอนแต้ม
+              Transfer
             </StyledButtonText>
           </StyledButtonBlack>
         </View>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     borderColor: '#F2F2F2'
   },
   pointFont: {
-    fontFamily: 'Prompt-Medium',
+    fontFamily: 'Roboto-Medium',
     paddingLeft: 10,
     fontSize: 20
   }

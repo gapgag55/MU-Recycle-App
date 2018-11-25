@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   text: {
-    fontFamily: 'Prompt-regular'
+    fontFamily: 'Roboto-Regular'
   }
 })
 

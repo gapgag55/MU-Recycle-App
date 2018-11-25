@@ -8,7 +8,7 @@ const Point = (props) => {
         style={props.style}
         source={require('../../assets/point.png')}
       />
-      <Text style={Object.assign({}, styles.text, props.styleText)}>{props.text} แต้ม</Text>
+      <Text style={Object.assign({}, styles.text, props.styleText)}>{props.text} points</Text>
     </View>
   );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 10,
     fontSize: 30,
-    fontFamily: 'Prompt-Regular'
+    fontFamily: 'Roboto-Regular'
   }
 })
 

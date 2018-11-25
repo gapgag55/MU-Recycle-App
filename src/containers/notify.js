@@ -1,5 +1,30 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import { View, ScrollView } from 'react-native';
+import {Container} from '../components/utilities';
+import NotifyList from '../components/notifyList';
+
+import { theme } from '../../app.json';
+import {
+  Header,
+  HeaderTitle
+} from '../components/utilities';
+/*
+  [{
+    type: 'transfer',
+    receiver: 'ธนกิตติ์ สาชาติ',
+    amount: 20.0,
+    date: '2011-01-01T15:03:01.012345Z'
+  }, {
+    type: 'receiveTrash',
+    amount: 20.0,
+    date: '2011-01-01T15:03:01.012345Z'
+  }, {
+    type: 'receiveTransfer',
+    sender: 'ธนกิตติ์ สาชาติ',
+    amount: '20.0',
+    date: '2011-01-01T15:03:01.012345Z'
+  }]
+*/
 
 class Notify extends Component {
   onSuccess(e) {
@@ -9,26 +34,37 @@ class Notify extends Component {
   }
 
   render() {
+    const items = [{
+      type: 'transfer',
+      receiver: 'ธนกิตติ์ สาชาติ',
+      amount: 20.0,
+      date: '2011-01-01T15:03:01.012346Z'
+    }, {
+      type: 'receiveTrash',
+      amount: 20.0,
+      date: '2011-01-01T15:03:01.012348Z'
+    }, {
+      type: 'receiveTransfer',
+      sender: 'ธนกิตติ์ สาชาติ',
+      amount: '20.0',
+      date: '2011-01-01T15:03:01.012347Z'
+    }];
+    
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Notify Page!</Text>
+      <View>
+        <Header>
+          <HeaderTitle>Notifications</HeaderTitle>
+        </Header>
+        <View style={{backgroundColor: '#FFF', height: '100%'}}>
+          <ScrollView style={{padding: 20}}>
+            {items.map(item => (
+              <NotifyList key={item.date} data={item} />
+            ))}
+          </ScrollView>
+        </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    fontFamily: 'Prompt-Medium'
-  },
-});
 
 export default Notify;

@@ -3,16 +3,16 @@ import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Entypo';
 
+import {
+  StyledText
+} from './utilities';
+
 const StyledView = styled.View`
   flex-direction: column;
   align-items: center;
   text-align: center;
   justify-content: center;
   margin: 10px 20px;
-`;
-
-const StyledText = styled.Text`
-  font-family: Prompt-regular;
 `;
 
 class Event extends Component {
@@ -32,7 +32,7 @@ class Event extends Component {
         >
           <StyledView>
             <Icon name="wallet" size={30} />
-            <StyledText>โอนแต้ม</StyledText>
+            <StyledText>Transfer</StyledText>
           </StyledView>
         </TouchableHighlight>
         <TouchableHighlight
@@ -41,7 +41,7 @@ class Event extends Component {
         >
           <StyledView>
             <Icon name="share" size={30} />
-            <StyledText>แชร์</StyledText>
+            <StyledText>Share</StyledText>
           </StyledView>
         </TouchableHighlight>
         <TouchableHighlight
@@ -50,7 +50,7 @@ class Event extends Component {
         >
           <StyledView>
             <Icon name="download" size={30} />
-            <StyledText>บันทึก</StyledText>
+            <StyledText>Save</StyledText>
           </StyledView>
         </TouchableHighlight>
       </View>

@@ -33,23 +33,23 @@ class Login extends Component {
       <Container>
         <Image style={styles.logo} source={Logo} />
         <StyledTextInput
-          placeholder="อีเมล:"
+          placeholder="Email:"
           placeholderTextColor={theme.secondColor}
         />
         <StyledTextInput
-          placeholder="รหัสผ่าน:"
+          placeholder="Password:"
           placeholderTextColor={theme.secondColor}
         />
         <StyledButton
           onPress={this.onPress}
         >
-          <StyledButtonText>เข้าสู่ระบบ</StyledButtonText>
+          <StyledButtonText>Login</StyledButtonText>
         </StyledButton>
         <StyledButtonSmall
           onPress={this.onNavigate}
         >
           <StyledButtonTextSmall>
-            สมัครสมาชิก
+            Register
           </StyledButtonTextSmall>
         </StyledButtonSmall>
       </Container>

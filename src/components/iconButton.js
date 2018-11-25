@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   text: {
-    fontFamily: 'Prompt-regular',
+    fontFamily: 'Roboto-Regular',
     fontSize: 15
   }
 });

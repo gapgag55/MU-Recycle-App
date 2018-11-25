@@ -13,6 +13,8 @@ import ReceiveTrash from './containers/receiveTrash.js';
 import ReceiveSuccess from './containers/receiveSuccess.js';
 
 import News from './containers/news.js';
+import ReadNew from './containers/readNew.js';
+
 import Account from './containers/account.js';
 import Transfer from './containers/transfer.js';
 import TransferInput from './containers/transferInput.js';
@@ -49,6 +51,18 @@ const MapStack = createStackNavigator({
   headerMode: 'none',
 });
 
+const NewsStack =createStackNavigator({
+  News: {
+    screen: News,
+  },
+  ReadNew: {
+    screen: ReadNew,
+  }
+}, {
+  initialRouteName: 'News',
+  headerMode: 'none',
+})
+
 const BinStack = createStackNavigator({
   Bin: {
     screen: Bin,
@@ -74,49 +88,64 @@ const BinStack = createStackNavigator({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  [language["menu.map"]]: MapStack,
-  [language["menu.news"]]: News,
+  Map: {
+    screen: MapStack,
+    navigationOptions: () => ({
+      tabBarLabel: () => { },
+    })
+  },
+  News: {
+    screen: NewsStack,
+    navigationOptions: () => ({
+      tabBarLabel: () => { },
+    })
+  },
   Bin: {
     screen: BinStack,
     navigationOptions: () => ({
       tabBarLabel: () => { },
     })
   },
-  [language["menu.notify"]]: Notify,
-  [language["menu.account"]]: Account,
+  Notify: {
+    screen: Notify,
+    navigationOptions: () => ({
+      tabBarLabel: () => { },
+    })
+  },
+  Account: {
+    screen: Account,
+    navigationOptions: () => ({
+      tabBarLabel: () => { },
+    })
+  }
 }, {
-    initialRouteName: 'Bin',
+    initialRouteName: 'News',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
 
-        if (routeName === language["menu.map"]) {
+        if (routeName === 'Map') {
           iconName = "map";
-        } else if (routeName === language["menu.news"]) {
-          iconName = "globe";
+        } else if (routeName === 'News') {
+          iconName = "open-book";
         } else if (routeName === 'Bin') {
           return <Image
             source={require('../assets/scan.png')}
             style={{ width: '80%', height: '100%', borderRadius: 3, marginBottom: 10 }}
           />
-        } else if (routeName === language["menu.notify"]) {
+        } else if (routeName === 'Notify') {
           iconName = "bell";
-        } else if (routeName === language["menu.account"]) {
+        } else if (routeName === 'Account') {
           iconName = "user"
         }
 
-        return <Icon name={iconName} size={25} color={tintColor} />
+        return <Icon name={iconName} size={27} color={tintColor} style={{marginBottom: 5}} />
       },
     }),
     tabBarOptions: {
       activeTintColor: theme.primaryColor,
       inactiveTintColor: theme.secondColor,
-      animationEnabled: true,
-      labelStyle: {
-        fontSize: 12,
-        fontFamily: 'Prompt-regular',
-      },
       style: {
         height: 50,
         marginTop: 10,
