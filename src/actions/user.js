@@ -5,7 +5,6 @@ const auth = firebase.auth();
 
 /* Action Types */
 export const GET_USER = 'GET_USER';
-export const SET_USER = 'SET_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 
 /* Action Creators */
@@ -14,21 +13,22 @@ export function getUser() {
     const userId = await AsyncStorage.getItem('userId');
     const user =  database.ref(`/users/${userId}`);
     user.on('value', (snapshot) => {
+      console.log(userId, snapshot.val());
       dispatch({
         type: GET_USER, user: {
           id: userId,
           ...snapshot.val()
         }
-      })
+      });
     });
   }
 }
 
-export function setUser({ email, password, fullname, type }) {
+export function createUser({ email, password, fullname, type }) {
   return dispatch => {
     auth.createUserWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        const { email } = user._user;
+      .then(async ({ user }) => {
+        const { uid, email } = user._user;
         const data = {
           email,
           fullname,
@@ -37,16 +37,12 @@ export function setUser({ email, password, fullname, type }) {
           // fcmToken
         };
 
-        const userRef = database.ref(`/users/${user.uid}`)
+        await AsyncStorage.setItem('userId', uid);
+
+        const userRef = await database.ref(`/users/${uid}`)
         userRef.set(data);
 
-        dispatch({
-          type: SET_USER, user: {
-            id: user.uid,
-            ...data
-          }
-        });
-        // AsyncStorage.setItem('userId', user._user.uid)
+        dispatch(getUser());
       });
   }
 }

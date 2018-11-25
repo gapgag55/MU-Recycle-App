@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Image, TouchableHighlight, AsyncStorage} from 'react-native';
-import firebase from 'react-native-firebase';
-import Icon from 'react-native-vector-icons/Feather';
+import React, { Component } from 'react';
+import { Image } from 'react-native';
+import { connect } from 'react-redux';
 
-import {theme} from '../../app.json'
+import { createUser } from '../actions/user';
+
+import { theme } from '../../app.json'
 import Logo from '../../assets/logo.png'
 import {
   StyledTextInput,
@@ -14,35 +15,26 @@ import {
 import Close from '../components/close';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+      fullname: '',
+    };
+  }
   onPress = () => {
-    // const fullname = "Sarayut Lawilai";
+    const {email, password, fullname} = this.state;
+    const data = {
+      email,
+      password,
+      fullname,
+      type:'user',
+    };
 
-    // firebase.auth().createUserWithEmailAndPassword("imkopkap8@gmail.com", "Kopkap123456!")
-    // .then(({user}) => {
-    //   console.log(user);
-    //   const {email} = user._user;
-    //   const userRef = firebase.database().ref(`/users/${user.uid}`)
-    //   userRef.set({
-    //     email,
-    //     fullname,
-    //     point: 0.00,
-    //     type: 'user',
-    //   });
-
-    //   AsyncStorage.setItem('userId', user._user.refreshToken)
-    
-
-    // SET TO REDUX
-
-      this.props.navigation.navigate('TabNavigator');
-    // })
-    // .catch((error) => {
-    //   const { code, message } = error;
-    //   console.log(error)
-    //   // For details of error codes, see the docs
-    //   // The message contains the default Firebase string
-    //   // representation of the error
-    // });
+    this.props.createUser(data);
+    this.props.navigation.navigate('TabNavigator');
   }
 
   onClose = () => {
@@ -53,18 +45,22 @@ class Register extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <Image style={styles.logo} source={Logo} />
+        <Image style={{ marginBottom: 40 }} source={Logo} />
         <StyledTextInput
           placeholder="Email:"
           placeholderTextColor={theme.secondColor}
+          onChangeText={(email) => this.setState({ email })}
         />
         <StyledTextInput
           placeholder="Password:"
+          secureTextEntry={true}
           placeholderTextColor={theme.secondColor}
+          onChangeText={(password) => this.setState({ password })}
         />
         <StyledTextInput
           placeholder="Name:"
           placeholderTextColor={theme.secondColor}
+          onChangeText={(fullname) => this.setState({ fullname })}
         />
         <StyledButton
           onPress={this.onPress}
@@ -76,11 +72,8 @@ class Register extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  logo: {
-    marginBottom: 40,
-  }
-});
+const mapDispatchToProps = dispatch => ({
+  createUser: (data) => dispatch(createUser(data))
+})
 
-
-export default Register;
+export default connect(null, mapDispatchToProps)(Register);

@@ -1,3 +1,5 @@
+import {GET_USER, REMOVE_USER} from '../actions/user';
+
 const userState = {
   id: '',
   email: '',
@@ -9,11 +11,9 @@ const userState = {
 
 export default function reducer(state = userState, action) {
   switch (action.type) {
-    case 'GET_USER': 
+    case GET_USER: 
       return {...state, ...action.user};
-    case 'SET_USER': 
-      return {...state, ...action.user};
-    case 'REMOVE_USER':
+    case REMOVE_USER:
       return userState;
     default: 
       return state;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, AsyncStorage } from 'react-native';
-import {connect} from 'react-redux';
+import { Image, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
-import {getUser} from '../actions/user';
+import { getUser } from '../actions/user';
 
 import { theme } from '../../app.json'
 import Logo from '../../assets/logo.png'
@@ -17,8 +17,17 @@ import {
 } from '../components/utilities';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
   onPress = () => {
-    firebase.auth().signInWithEmailAndPassword("imkopkap2@gmail.com", "Kopkap123456!")
+    const { email, password } = this.state;
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await AsyncStorage.setItem('userId', user._user.uid);
         this.props.getUser();
@@ -33,14 +42,17 @@ class Login extends Component {
   render() {
     return (
       <Container>
-        <Image style={styles.logo} source={Logo} />
+        <Image style={{marginBottom: 20}} source={Logo} />
         <StyledTextInput
           placeholder="Email:"
           placeholderTextColor={theme.secondColor}
+          onChangeText={(email) => this.setState({ email })}
         />
         <StyledTextInput
           placeholder="Password:"
+          secureTextEntry={true}
           placeholderTextColor={theme.secondColor}
+          onChangeText={(password) => this.setState({ password })}
         />
         <StyledButton
           onPress={this.onPress}
@@ -58,12 +70,6 @@ class Login extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    marginBottom: 40,
-  }
-});
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(getUser())
