@@ -61,7 +61,7 @@ class TransferInput extends Component {
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <Title style={{marginBottom: 20}}>Point Transfer</Title>
+        <Title style={{marginBottom: 20}}>Transfer</Title>
         <View style={styles.flex}>
           <Text style={styles.font}>Your points:</Text>
           <Point

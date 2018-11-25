@@ -119,7 +119,7 @@ const TabNavigator = createBottomTabNavigator({
     })
   }
 }, {
-    initialRouteName: 'News',
+    initialRouteName: 'Map',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
@@ -161,5 +161,5 @@ export default createAppContainer(createSwitchNavigator({
   AuthStack,
   TabNavigator
 }, {
-  initialRouteName: 'TabNavigator'
+  initialRouteName: 'AuthLoading'
 }));

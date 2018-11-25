@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
   close: {
     position: 'absolute',
     top: '10%',
-    right: 30
+    right: 20,
+    zIndex: 2,
   }
 });
 

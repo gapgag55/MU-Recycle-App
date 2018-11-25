@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, View } from 'react-native';
-import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
-import { theme } from '../../app.json';
 
 import Point from '../components/point';
 import bins from '../data/bins';
@@ -26,20 +25,8 @@ class Map extends Component {
     };
   }
 
-  componentWillMount() {
-    const {uid} = firebase.auth().currentUser._user;
-    var user = firebase.database().ref(`/users/${uid}`)
-    user.on('value', (snapshot) => {
-      this.updatePoint(snapshot.val())
-    });
-  }
-
   onRegionChange = (region) => {
     this.setState({ region });
-  }
-
-  updatePoint = ({point}) => {
-    this.setState({point})
   }
 
   transfer = () => {
@@ -47,7 +34,7 @@ class Map extends Component {
   }
 
   render() {
-    const {point} = this.state;
+    const {point} = this.props.user;
     return (
       <View
         style={styles.map}
@@ -71,8 +58,6 @@ class Map extends Component {
         <MapView
           style={styles.map}
           region={this.state.region}
-          loadingEnabled={true}
-          loadingIndicatorColor={theme.primaryColor}
           showsUserLocation={true}
         >
           {bins.map(marker => (
@@ -125,4 +110,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Map;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(Map);

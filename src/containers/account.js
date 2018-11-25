@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import firebase from 'react-native-firebase';
+import { StyleSheet, Text } from 'react-native';
+import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
+
+import { removeUser } from '../actions/user';
 
 import {
   Container,
@@ -12,35 +14,13 @@ import {
 } from '../components/utilities';
 
 class Account extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      id: '',
-      fullname: '',
-      email: ''
-    }
-  }
-  
-  componentWillMount() {
-    const {uid} = firebase.auth().currentUser._user;
-    var user = firebase.database().ref(`/users/${uid}`)
-    user.on('value', (snapshot) => {
-      this.setUser(snapshot.key, snapshot.val())
-    });
-  }
-
-  setUser = (id, { fullname, email }) => {
-    this.setState({id, fullname, email});
-  }
-
   logout = () => {
-    // CODE HERE
+    this.props.logout();
     this.props.navigation.navigate('AuthStack');
   }
 
   render() {
-    const {id, email, fullname} = this.state;
+    const { id, email, fullname } = this.props.user;
     return (
       <Container style={styles.container}>
         <Title>{fullname}</Title>
@@ -65,7 +45,7 @@ class Account extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60, 
+    paddingTop: 60,
     paddingBottom: 30,
     justifyContent: 'space-between'
   },
@@ -74,4 +54,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Account;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapStateToDispatch = dispatch => ({
+  logout: () => dispatch(removeUser())
+})
+
+export default connect(mapStateToProps, mapStateToDispatch)(Account);

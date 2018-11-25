@@ -1,8 +1,11 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Image, AsyncStorage} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Image, AsyncStorage } from 'react-native';
+import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
 
-import {theme} from '../../app.json'
+import {getUser} from '../actions/user';
+
+import { theme } from '../../app.json'
 import Logo from '../../assets/logo.png'
 import {
   Container,
@@ -16,12 +19,11 @@ import {
 class Login extends Component {
   onPress = () => {
     firebase.auth().signInWithEmailAndPassword("imkopkap2@gmail.com", "Kopkap123456!")
-    .then(({user}) => {
-      // Send uid to redux to get full information
-
-      AsyncStorage.setItem('userId', user._user.refreshToken)
-      this.props.navigation.navigate('TabNavigator');
-    });
+      .then(async ({ user }) => {
+        await AsyncStorage.setItem('userId', user._user.uid);
+        this.props.getUser();
+        this.props.navigation.navigate('TabNavigator');
+      });
   }
 
   onNavigate = () => {
@@ -63,5 +65,8 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch(getUser())
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

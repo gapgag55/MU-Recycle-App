@@ -36,7 +36,7 @@ export const StyledTextInput = styled.TextInput`
 
 export const StyledButton = styled.TouchableHighlight`
   background-color: ${theme.primaryColor};
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 10px 15px;
   width: 100%;
   margin-bottom: 20px;
