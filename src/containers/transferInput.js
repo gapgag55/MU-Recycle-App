@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import {
   StyledButton,
@@ -30,24 +31,26 @@ class TransferInput extends Component {
   }
 
   setReceiver = (id, value) => {
-    console.log(id, value);
     this.setState({
       receiver: {
         id,
         ...value
       }
-    })
+    });
   }
 
   onSubmit = () => {
     // If Okay
     const {navigation} = this.props;
+    const {point} = this.state;
     const uid = navigation.getParam('userId');
     
     var user = firebase.database().ref(`/users/${uid}`)
     user.update({
-      point: this.state.receiver.point + 20
+      point: this.state.receiver.point + point
     });
+
+    // Update point to user
     
     navigation.navigate('TransferSuccess');
   }
@@ -57,7 +60,8 @@ class TransferInput extends Component {
   }
 
   render() {
-    const {receiver, point} = this.state;
+    const {point} = this.props.user;
+    const {receiver} = this.state;
     return (
       <Container>
         <Close onClose={this.onClose} />
@@ -67,7 +71,7 @@ class TransferInput extends Component {
           <Point
             style={{ width: 30, height: 31 }}
             styleText={{ fontSize: 22 }}
-            text="20"
+            text={point}
           />
         </View>
         <Line />
@@ -79,6 +83,7 @@ class TransferInput extends Component {
         }}>{receiver.fullname}</Title>
         <StyledTextInput
           placeholder="Points"
+          onChangeText={(point) => this.setState({ point })}
         />
         <Line />
         <StyledButton
@@ -105,4 +110,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TransferInput;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(TransferInput);

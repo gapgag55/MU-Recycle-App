@@ -38,7 +38,7 @@ class AuthLoading extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(getUser()),
 });
 
