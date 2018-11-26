@@ -83,7 +83,7 @@ const BinStack = createStackNavigator({
     })
   },
 }, {
-  initialRouteName: 'ReceiveTrash',
+  initialRouteName: 'Bin',
   headerMode: 'none',
 });
 

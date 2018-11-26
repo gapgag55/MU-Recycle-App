@@ -61,9 +61,10 @@ class ReceiveTrash extends Component {
   }
 
   receiveTrashFromBluethooth = ({ value, peripheral, characteristic, service }) => {
-    const code = bytesToString(value);
-    this.props.addTrash(code);
-    console.log(`Recieved ${data} for characteristic ${characteristic}`);
+    if (value[0] != 10) {
+      const code = parseInt(bytesToString(value));
+      this.props.addTrash(code);
+    }
   }
 
   addToBin = () => {
