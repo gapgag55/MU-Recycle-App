@@ -11,6 +11,7 @@
     "react-native": "0.57.5",
     "react-native-ble-manager": "^6.5.4",
     "react-native-camera": "^1.4.1",
+    "react-native-fcm": "^16.2.4",
     "react-native-firebase": "^5.1.0",
     "react-native-gesture-handler": "^1.0.9",
     "react-native-maps": "^0.22.1",

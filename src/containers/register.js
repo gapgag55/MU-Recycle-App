@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 
+import Loading from '../components/loading'
 import { createUser } from '../actions/user';
 
 import { theme } from '../../app.json'
@@ -22,6 +23,7 @@ class Register extends Component {
       email: '',
       password: '',
       fullname: '',
+      isLoading: false
     };
   }
   onPress = () => {
@@ -33,6 +35,9 @@ class Register extends Component {
       type:'user',
     };
 
+    this.setState({
+      isLoading: true
+    });
     this.props.createUser(data);
     this.props.navigation.navigate('TabNavigator');
   }
@@ -42,8 +47,10 @@ class Register extends Component {
   }
 
   render() {
+    const {isLoading} = this.state;
     return (
       <Container>
+        {isLoading && <Loading />}
         <Close onClose={this.onClose} />
         <Image style={{ marginBottom: 40 }} source={Logo} />
         <StyledTextInput

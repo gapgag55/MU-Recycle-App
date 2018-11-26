@@ -3,8 +3,10 @@ import { StyleSheet, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
 
+import { getBins } from '../actions/bins';
+
 import Point from '../components/point';
-import bins from '../data/bins';
+// import bins from '../data/bins';
 import {
   StyledButtonBlack,
   StyledButtonText
@@ -25,6 +27,10 @@ class Map extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getBins();
+  }
+
   onRegionChange = (region) => {
     this.setState({ region });
   }
@@ -34,7 +40,9 @@ class Map extends Component {
   }
 
   render() {
-    const {point} = this.props.user;
+    const {user, bins} = this.props;
+
+    const {point} = user;
     return (
       <View
         style={styles.map}
@@ -111,7 +119,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  bins: state.bins,
 });
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchToProps = dispatch => ({
+  getBins: () => dispatch(getBins()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

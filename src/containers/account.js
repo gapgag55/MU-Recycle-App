@@ -3,6 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
 
+import Loading from '../components/loading';
 import { removeUser } from '../actions/user';
 
 import {
@@ -21,9 +22,14 @@ class Account extends Component {
 
   render() {
     const { id, email, fullname } = this.props.user;
+
+    if (!id) {
+      return (<Loading />);
+    }
+
     return (
       <Container style={styles.container}>
-        <Title>{fullname}</Title>
+        <Title style={{fontSize: 30}}>{fullname}</Title>
         <Text style={styles.text}>{email}</Text>
         <Line />
         <QRCode

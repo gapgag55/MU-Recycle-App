@@ -13,7 +13,7 @@ export function getReceiver(userId) {
     const user = database.ref(`/users/${userId}`);
     user.on('value', (snapshot) => {
       dispatch({
-        type: GET_USER, user: {
+        type: GET_RECEIVER, user: {
           id: userId,
           ...snapshot.val()
         }
@@ -23,18 +23,19 @@ export function getReceiver(userId) {
 }
 
 export function updatePointReceiver(point) {
-  return async (dispatch, ownProps) => {
-    const { user, receiver } = ownProps;
+  return async (dispatch, getState) => {
+    const { user, receiver } = getState();
+    const transferPoint = parseInt(point);
 
     const userRef = database.ref(`/users/${user.id}`);
     const receiverRef = database.ref(`/users/${receiver.id}`);
 
     userRef.update({
-      point: user.point - point
+      point: user.point - transferPoint
     });
 
     receiverRef.update({
-      point: receiver.point + point
+      point: receiver.point + transferPoint
     });
 
     // Loading the latest user data from database

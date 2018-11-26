@@ -22,7 +22,8 @@ class TransferSuccess extends Component {
   }
 
   render() {
-    const { fullname, navigation } = this.props.receiver;
+    const { receiver, navigation } = this.props;
+    const { fullname } = receiver;
 
     return (
       <Container>
@@ -39,7 +40,7 @@ class TransferSuccess extends Component {
         <Point
           style={{ width: 40, height: 41 }}
           styleText={{ fontSize: 26 }}
-          text={navigation.getParams('point')}
+          text={navigation.getParam('point')}
         />
         <Line />
         <Event />

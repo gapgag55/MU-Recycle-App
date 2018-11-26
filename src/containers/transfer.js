@@ -7,9 +7,12 @@ import { getReceiver } from '../actions/receiver';
 class Transfer extends Component {
   onRead = (userId) => {
     // Read Success 
-    if (data != undefined) {
+    if (userId != undefined) {
       this.props.getReceiver(userId);
-      this.props.navigation.push('TransferInput');
+
+      setTimeout(() => {
+        this.props.navigation.push('TransferInput');
+      }, 300)
     }
   }
 
@@ -24,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
   getReceiver: (userId) => dispatch(getReceiver(userId))
 });
 
-export default connect(mapDispatchToProps)(Transfer);
+export default connect(null, mapDispatchToProps)(Transfer);

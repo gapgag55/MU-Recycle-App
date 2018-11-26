@@ -6,6 +6,8 @@ class Scanner extends Component {
   render() {
     return (
       <QRCodeScanner
+        reactivate={true}
+        reactivateTimeout={5000}
         onRead={({data}) => this.props.onRead(data)}
         cameraStyle={styles.cameraContainer}
         showMarker={true}

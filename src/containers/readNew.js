@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import {
   Title,
   StyledText,
-  Container
 } from '../components/utilities';
 import Close from '../components/close';
 

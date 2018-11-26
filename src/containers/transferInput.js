@@ -13,7 +13,7 @@ import Point from '../components/point';
 import Close from '../components/close';
 
 import {
-  updatePointReciver,
+  updatePointReceiver,
   removeReceiver
 } from '../actions/receiver';
 
@@ -25,21 +25,21 @@ class TransferInput extends Component {
   }
 
   onSubmit = () => {
-    // If Okay
     const { point } = this.state;
-    // Update point to user
-    this.props.updatePointReciver(point);
-    navigation.navigate('TransferSuccess');
+    
+    this.props.updatePointReceiver(point);
+    this.props.navigation.navigate('TransferSuccess', {point});
   }
 
   onClose = () => {
     this.props.removeReceiver();
-    this.props.navigation.navigate('Map', {point: this.state.point});
+    this.props.navigation.navigate('Map');
   }
 
   render() {
     const { point } = this.props.user;
-    const { receiver } = this.state;
+    const { receiver } = this.props;
+    
     return (
       <Container>
         <Close onClose={this.onClose} />
@@ -93,8 +93,8 @@ const mapStateToProps = state => ({
   receiver: state.receiver,
 });
 
-const mapDispatchToProps = dispatch => ({
-  updatePointReciver: (point) => dispatch(updatePointReciver(point)),
+const mapDispatchToProps = (dispatch) => ({
+  updatePointReceiver: (point) => dispatch(updatePointReceiver(point)),
   removeReceiver: () => dispatch(removeReceiver()),
 });
 

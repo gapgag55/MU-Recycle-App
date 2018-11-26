@@ -3,6 +3,7 @@ import { Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
+import Loading from '../components/loading';
 import { getUser } from '../actions/user';
 
 import { theme } from '../../app.json'
@@ -22,11 +23,17 @@ class Login extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     };
   }
+  
   onPress = () => {
     const { email, password } = this.state;
+    this.setState({
+      isLoading: true
+    });
+
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await AsyncStorage.setItem('userId', user._user.uid);
@@ -40,9 +47,11 @@ class Login extends Component {
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
       <Container>
-        <Image style={{marginBottom: 20}} source={Logo} />
+        {isLoading && <Loading />}
+        <Image style={{ marginBottom: 20 }} source={Logo} />
         <StyledTextInput
           placeholder="Email:"
           placeholderTextColor={theme.secondColor}
