@@ -13,7 +13,6 @@ export function getUser() {
     const userId = await AsyncStorage.getItem('userId');
     const user =  database.ref(`/users/${userId}`);
     user.on('value', (snapshot) => {
-      console.log(userId, snapshot.val());
       dispatch({
         type: GET_USER, user: {
           id: userId,

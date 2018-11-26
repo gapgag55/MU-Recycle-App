@@ -34,7 +34,7 @@ class TransferInput extends Component {
 
   onClose = () => {
     this.props.removeReceiver();
-    this.props.navigation.navigate('Map');
+    this.props.navigation.navigate('Map', {point: this.state.point});
   }
 
   render() {

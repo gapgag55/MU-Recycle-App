@@ -1,6 +1,8 @@
 import firebase from 'react-native-firebase';
 const database = firebase.database();
 
+import { GET_USER } from './user';
+
 /* Action Types */
 export const GET_RECEIVER = 'GET_RECEIVER';
 export const REMOVE_RECEIVER = 'REMOVE_RECEIVER';
@@ -8,9 +10,8 @@ export const REMOVE_RECEIVER = 'REMOVE_RECEIVER';
 /* Action Creators */
 export function getReceiver(userId) {
   return async dispatch => {
-    const user =  database.ref(`/users/${userId}`);
+    const user = database.ref(`/users/${userId}`);
     user.on('value', (snapshot) => {
-      console.log(userId, snapshot.val());
       dispatch({
         type: GET_USER, user: {
           id: userId,
@@ -22,16 +23,28 @@ export function getReceiver(userId) {
 }
 
 export function updatePointReceiver(point) {
-  return async dispatch => {
-    // const uid = navigation.getParam('userId');
+  return async (dispatch, ownProps) => {
+    const { user, receiver } = ownProps;
 
-    // var user = firebase.database().ref(`/users/${uid}`)
-    // user.update({
-    //   point: this.state.receiver.point + point
-    // });
+    const userRef = database.ref(`/users/${user.id}`);
+    const receiverRef = database.ref(`/users/${receiver.id}`);
+
+    userRef.update({
+      point: user.point - point
+    });
+
+    receiverRef.update({
+      point: receiver.point + point
+    });
+
+    // Loading the latest user data from database
+    dispatch({ type: GET_USER });
+
+    // Loading the latest receiver data from database
+    getReceiver(receiver.id);
   };
 }
 
 export function removeReceiver() {
-  return {type: REMOVE_RECEIVER};
+  return { type: REMOVE_RECEIVER };
 }
