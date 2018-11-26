@@ -1,23 +1,64 @@
+import firebase from 'react-native-firebase';
+const database = firebase.database();
+
 /* Action Types */
 export const ADD_TRASH = 'ADD_TRASH';
 export const REMOVE_TRASH = 'REMOVE_TRASH';
+export const UPDATE_POINT_USER = 'UPDATE_POINT_USER';
 
 /* Action Creators */
-export function addTrash() {
-  return async dispatch => {
-    // const userId = await AsyncStorage.getItem('userId');
-    // const user =  database.ref(`/users/${userId}`);
-    // user.on('value', (snapshot) => {
-    //   dispatch({
-    //     type: GET_USER, user: {
-    //       id: userId,
-    //       ...snapshot.val()
-    //     }
-    //   });
-    // });
+export function addTrash(code) {
+  return async (dispatch, getState) => {
+    const trashState = [...getState().trashes];
+    const trash = database.ref(`/trashes`);
+
+    trash.on('value', (snapshot) => {
+      let trashes = snapshot.val();
+      trashes = Object.keys(trashes).map((key) => { return trashes[key] });
+      let addedTrash = trashes.filter(item => item.code == code);
+
+      // 1. If not found trash -> addTrash
+      // 2. If found, increase amount
+
+      let found = 0;
+      for (let i = 0; i < trashState.length; i++) {
+        if (trashState[i].code == addedTrash[0].code) {
+
+          trashState[i].amount += 1;
+
+          found = 1;
+          break;
+        }
+      }
+
+      if (!found)
+        trashState.push({ ...addedTrash[0], amount: 1 });
+
+      dispatch({
+        type: ADD_TRASH,
+        trashes: trashState
+      });
+    });
   }
 }
 
 export function removeTrash() {
   return { type: REMOVE_TRASH };
+}
+
+export function updatePointUser() {
+  return (dispatch, getState) => {
+    const { user, trashes } = getState();
+    const userRef = database.ref(`/users/${user.id}`);
+
+    let point = 0;
+  
+    for (let i = 0; i < trashes.length; i++) {
+      point += (trashes[i].amount * trashes[i].rate);
+    }
+
+    userRef.update({
+      point: (parseFloat(user.point) + parseFloat(point)).toFixed(2)
+    });
+  }
 }

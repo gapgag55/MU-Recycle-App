@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import {
+  View,
+  Image,
+  NativeEventEmitter,
+  NativeModules,
+  TouchableHighlight
+} from 'react-native';
 import { connect } from 'react-redux';
+import Permissions from 'react-native-permissions'
+import BleManager from 'react-native-ble-manager';
+import { bytesToString } from 'convert-string';
+
+import {
+  addTrash,
+  removeTrash,
+  updatePointUser
+} from '../actions/trash';
 
 import {
   Container,
@@ -14,91 +29,85 @@ import Close from '../components/close';
 import Point from '../components/point';
 import TrashList from '../components/trashList';
 
+const BleManagerModule = NativeModules.BleManager;
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+
 class ReceiveTrash extends Component {
+
   componentDidMount() {
-    // BleManager.start({showAlert: false})
-    // this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
+    const { navigation } = this.props;
+    BleManager.start({ showAlert: true });
 
-    // 764449C8-63C7-B3A8-22BF-B716116A248C - Mang
-    // 68800E93-5087-38AB-F6E6-3B82FF101C64 - MAC Kopkap
-    // FC-A8-9A-00-2C-01 -
+    const peripheral = navigation.getParam('binId');
 
-    var peripheral = {
-      id: '68800E93-5087-38AB-F6E6-3B82FF101C64'
-    };
-
-    // BleManager.getDiscoveredPeripherals([])
-    // .then((peripheralsArray) => {
-    //   // Success code
-    //   console.log('Discovered peripherals: ' + peripheralsArray.length);
-    // });
-
-    // BleManager.connect(peripheral.id).then(() => {
-    //   console.log('Connected to ' + peripheral.id);
-      
-    //   BleManager.retrieveServices(peripheral.id)
-    //   .then((peripheralInfo) => {
-    //     // Success code
-    //     console.log('Peripheral info:', peripheralInfo);
-
-    //     BleManager.read(peripheral.id, "180A", "2A24")
-    //     .then((readData) => {
-    //       // Success code
-    //       console.log('Read: ' + readData);
-    //     });
-    //   });
-    // });
-
-    // BleManager.isPeripheralConnected(peripheral.id, [])
-    // .then((isConnected) => {
-    //   if (isConnected) {
-    //     console.log('Peripheral is connected!');
-    //   } else {
-    //     console.log('Peripheral is NOT connected!');
-    //   }
-    // });
-
-    // Check Permission Bluethooth
+    BleManager.connect(peripheral).then(() => {
+      console.log('Connected');
+      this.connectAndPrepare(peripheral, 'FFE0', 'FFE1');
+    });
   }
 
-  // handleDiscoverPeripheral(peripheral){
-  //   console.log('Got ble peripheral', peripheral);
-  // }
+  connectAndPrepare = async (peripheral, service, characteristic) => {
+    // Connect to device
+    await BleManager.connect(peripheral);
+    // Before startNotification you need to call retrieveServices
+    await BleManager.retrieveServices(peripheral)
+    // To enable BleManagerDidUpdateValueForCharacteristic listener
+    await BleManager.startNotification(peripheral, service, characteristic)
+    // Add event listener
+    bleManagerEmitter.addListener(
+      'BleManagerDidUpdateValueForCharacteristic',
+      this.receiveTrashFromBluethooth
+    );
+  }
 
-  // startScan = () => {
-  //   BleManager.scan([], 10, true).then((results) => {
-  //     console.log('Scanning...', results);
-  //     // this.setState({scanning:true});
-  //   });
-  // }
+  receiveTrashFromBluethooth = ({ value, peripheral, characteristic, service }) => {
+    const code = bytesToString(value);
+    this.props.addTrash(code);
+    console.log(`Recieved ${data} for characteristic ${characteristic}`);
+  }
+
+  addToBin = () => {
+    this.props.addTrash(1); 
+  }
 
   onClose = () => {
     // Close bluethooth connection
-
+    this.props.removeTrash();
     this.props.navigation.navigate('Bin');
   }
 
   onConfirm = () => {
     // Close bluethooth connection
-
-    this.props.navigation.push('ReceiveSuccess', {items: this.state.items});
+    this.props.updatePointUser();
+    this.props.navigation.push('ReceiveSuccess');
   }
 
   render() {
     const { trashes } = this.props;
+    let point = 0;
+
+    if (trashes.length > 0) {
+      for (let i = 0; i < trashes.length; i++) {
+        point += (trashes[i].amount * trashes[i].rate);
+      }
+    }
+
     return (
       <Container>
         <Close onClose={this.onClose} />
         <Title>BIN IS READY</Title>
         <StyledText>Please put in the recyclable trash</StyledText>
         <Line />
+        {/* <TouchableHighlight onPress={this.addToBin}>
+          <Title>ADD TRASH</Title>
+        </TouchableHighlight> */}
         {(trashes.length == 0) ?
           <Image source={require('../../assets/logo.png')} /> :
           <View style={{ width: '100%', alignItems: 'center' }}>
             <Point
               style={{ width: 40, height: 41 }}
               styleText={{ fontSize: 32 }}
-              text="20"
+              text={point.toPrecision(2)}
             />
             <TrashList dataSource={trashes} />
             <Line />
@@ -121,7 +130,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addTrash: (trash) => dispatch(addTrash(trash))
+  addTrash: (code) => dispatch(addTrash(code)),
+  removeTrash: () => dispatch(removeTrash()),
+  updatePointUser: () => dispatch(updatePointUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiveTrash);

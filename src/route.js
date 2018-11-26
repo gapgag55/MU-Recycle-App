@@ -83,7 +83,7 @@ const BinStack = createStackNavigator({
     })
   },
 }, {
-  initialRouteName: 'Bin',
+  initialRouteName: 'ReceiveTrash',
   headerMode: 'none',
 });
 
@@ -119,7 +119,7 @@ const TabNavigator = createBottomTabNavigator({
     })
   }
 }, {
-    initialRouteName: 'Map',
+    initialRouteName: 'Bin',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;

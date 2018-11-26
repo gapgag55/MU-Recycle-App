@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {View, Image, ScrollView } from 'react-native';
-
+import { connect } from 'react-redux';
 import {
   Container,
   TitleGreen,
@@ -12,52 +11,24 @@ import Point from '../components/point';
 import TrashList from '../components/trashList';
 import Event from '../components/event';
 
-/*
-  [{
-    name: 'ขวดใส',
-    price: 10.05
-  }, {
-    name: 'ขวดใส',
-    price: 10.05
-  } {
-    name: 'กระป๋อง',
-    price: 20
-  }]
-
-  convert to 
-
-  [{
-    name: 'ขวดใส',
-    price: 10.05,
-    amount: 2
-  }, {
-    name: 'กระป๋อง',
-    price: 20,
-    amount: 1
-  }]
-
-*/
+import { removeTrash } from '../actions/trash';
 
 class ReceiveSuccess extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: []
-    }
-  }
-
-  componentWillMount() {
-    const items = this.props.navigation.getParam('items');
-    this.setState({items});
-  }
-
   onClose = () => {
+    this.props.removeTrash();
     this.props.navigation.navigate('Bin');
   }
 
   render() {
-    const {items} = this.state;
+    const { trashes } = this.props;
+    let point = 0;
+
+    if (trashes.length > 0) {
+      for (let i = 0; i < trashes.length; i++) {
+        point += (trashes[i].amount * trashes[i].rate);
+      }
+    }
+
     return (
       <Container>
         <Close onClose={this.onClose} />
@@ -67,9 +38,9 @@ class ReceiveSuccess extends Component {
         <Point
           style={{ width: 40, height: 41 }}
           styleText={{ fontSize: 32 }}
-          text="20"
+          text={point}
         />
-        <TrashList dataSource={items} />
+        <TrashList dataSource={trashes} />
         <Line />
         <Event />
       </Container>
@@ -77,4 +48,12 @@ class ReceiveSuccess extends Component {
   }
 }
 
-export default ReceiveSuccess;
+const mapStateToProps = state => ({
+  trashes: state.trashes
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeTrash: () => dispatch(removeTrash())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiveSuccess);

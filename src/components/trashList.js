@@ -11,11 +11,11 @@ class TrashList extends Component {
     return dataSource.map(data => (
       <View key={data.name} style={{...styles.list, width: '80%', marginTop: 20}}>
         <View style={styles.list}>
-          <StyledText>{data.name}</StyledText>
+          <StyledText>{data.title}</StyledText>
           <StyledText> x{data.amount}</StyledText>
         </View>
         <View>
-          <StyledText>{data.price} แต้ม</StyledText>
+          <StyledText>{(data.rate * data.amount).toPrecision(2)} point</StyledText>
         </View>
       </View>
     ))
