@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
+import { connect } from 'react-redux';
 import {
-  StyledButton,
-  StyledButtonText,
   Container,
   Title,
   TitleGreen,
-  Line,
-  StyledTextInput
+  Line
 } from '../components/utilities';
 import Point from '../components/point';
 import Close from '../components/close';
 import Event from '../components/event';
 
-class TransferSuccess extends Component {
-  onSubmit = () => {}
+import {
+  removeReceiver
+} from '../actions/receiver';
 
+class TransferSuccess extends Component {
   onClose = () => {
+    this.props.removeReceiver();
     this.props.navigation.navigate('Map');
   }
 
   render() {
+    const { fullname } = this.props.receiver;
+
     return (
       <Container>
         <Close onClose={this.onClose} />
@@ -32,7 +35,7 @@ class TransferSuccess extends Component {
           marginBottom: 20,
           fontWeight: 'normal',
           fontSize: 20
-        }}>Tanakit Sachati</Title>
+        }}>{fullname}</Title>
         <Point
           style={{ width: 40, height: 41 }}
           styleText={{ fontSize: 26 }}
@@ -57,4 +60,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TransferSuccess;
+const mapStateToProps = state => ({
+  receiver: state.receiver,
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeReceiver: () => dispatch(removeReceiver()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransferSuccess);

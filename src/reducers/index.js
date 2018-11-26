@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import user from './user';
-// import transferReducer from './transfer';
+import receiver from './receiver';
 
 export default combineReducers({
   user,
-  // transfer: transferReducer
+  receiver,
 });

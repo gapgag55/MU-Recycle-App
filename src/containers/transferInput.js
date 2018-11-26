@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'react-native-firebase';
 import {
   StyledButton,
   StyledButtonText,
@@ -13,59 +12,38 @@ import {
 import Point from '../components/point';
 import Close from '../components/close';
 
+import {
+  updatePointReciver,
+  removeReceiver
+} from '../actions/receiver';
+
 class TransferInput extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      receiver: {},
-      point: 0
-    }
-  }
-  componentWillMount() {
-    const uid = this.props.navigation.getParam('userId')
-    var user = firebase.database().ref(`/users/${uid}`)
-    user.on('value', (snapshot) => {
-      this.setReceiver(snapshot.key, snapshot.val())
-    });
-  }
-
-  setReceiver = (id, value) => {
-    this.setState({
-      receiver: {
-        id,
-        ...value
-      }
-    });
+    this.state = { point: 0 }
   }
 
   onSubmit = () => {
     // If Okay
-    const {navigation} = this.props;
-    const {point} = this.state;
-    const uid = navigation.getParam('userId');
-    
-    var user = firebase.database().ref(`/users/${uid}`)
-    user.update({
-      point: this.state.receiver.point + point
-    });
-
+    const { point } = this.state;
     // Update point to user
-    
+    this.props.updatePointReciver(point);
     navigation.navigate('TransferSuccess');
   }
 
   onClose = () => {
+    this.props.removeReceiver();
     this.props.navigation.navigate('Map');
   }
 
   render() {
-    const {point} = this.props.user;
-    const {receiver} = this.state;
+    const { point } = this.props.user;
+    const { receiver } = this.state;
     return (
       <Container>
         <Close onClose={this.onClose} />
-        <Title style={{marginBottom: 20}}>Transfer</Title>
+        <Title style={{ marginBottom: 20 }}>Transfer</Title>
         <View style={styles.flex}>
           <Text style={styles.font}>Your points:</Text>
           <Point
@@ -111,7 +89,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  receiver: state.receiver,
 });
 
-export default connect(mapStateToProps)(TransferInput);
+const mapDispatchToProps = dispatch => ({
+  updatePointReciver: (point) => dispatch(updatePointReciver(point)),
+  removeReceiver: () => dispatch(removeReceiver()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransferInput);
