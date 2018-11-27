@@ -4,6 +4,7 @@ import {
   Image,
   NativeEventEmitter,
   NativeModules,
+  Vibration
 } from 'react-native';
 import { connect } from 'react-redux';
 import Permissions from 'react-native-permissions'
@@ -63,6 +64,7 @@ class ReceiveTrash extends Component {
     if (value[0] != 10) {
       const code = parseInt(bytesToString(value));
       this.props.addTrash(code);
+      Vibration.vibrate(10000);
     }
   }
 
