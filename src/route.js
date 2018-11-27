@@ -118,7 +118,7 @@ const TabNavigator = createBottomTabNavigator({
     })
   }
 }, {
-    initialRouteName: 'Bin',
+    initialRouteName: 'Map',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
