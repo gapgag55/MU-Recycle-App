@@ -4,11 +4,12 @@ import Icon from 'react-native-vector-icons/Feather';
 
 class Close extends Component {
   render() {
+    const { underlayColor } = this.props;
     return (
       <TouchableHighlight
         style={styles.close}
         onPress={this.props.onClose}
-        underlayColor="#eee"
+        underlayColor={underlayColor ? underlayColor : "#eee"}
       >
         <Icon name="x" size={30} />
       </TouchableHighlight>

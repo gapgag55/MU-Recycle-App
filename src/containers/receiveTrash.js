@@ -4,7 +4,6 @@ import {
   Image,
   NativeEventEmitter,
   NativeModules,
-  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import Permissions from 'react-native-permissions'

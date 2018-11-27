@@ -3,7 +3,6 @@ import { Image } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Entypo';
 import { theme } from '../app.json';
-import language from './language';
 
 import Map from './containers/map.js';
 import Notify from './containers/notify.js';

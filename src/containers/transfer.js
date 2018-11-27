@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Scanner from '../components/scanner';
+import Close from '../components/close';
 
 import { getReceiver } from '../actions/receiver';
 
@@ -16,9 +18,19 @@ class Transfer extends Component {
     }
   }
 
+  onClose = () => {
+    this.props.navigation.navigate('Map');
+  }
+
   render() {
     return (
-      <Scanner onRead={this.onRead} />
+      <View style={{height: '100%'}}>
+        <Close
+          onClose={this.onClose}
+          underlayColor={'#FFFFF00'}
+        />
+        <Scanner onRead={this.onRead} />
+      </View>
     );
   }
 }
