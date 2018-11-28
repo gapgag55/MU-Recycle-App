@@ -33,13 +33,39 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class ReceiveTrash extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      peripheral: {}
+    }
+  }
 
   componentDidMount() {
-    const { navigation } = this.props;
-
-    const peripheral = navigation.getParam('binId');
-    this.connectAndPrepare(peripheral, 'FFE0', 'FFE1');
+    this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
+    BleManager.scan([], 3, true)
   }
+
+  componentWillUnmount() {
+    this.handlerDiscover.remove();
+  }
+
+  // startScan() {
+  //   BleManager.scan([], 3, true)
+  // }
+
+  handleDiscoverPeripheral = (peripheral) => {
+    // console.log('Got ble peripheral', peripheral);
+
+    const { navigation } = this.props;
+    const binName = navigation.getParam('binName');
+
+    if (peripheral.name == binName) {
+      this.setState({ peripheral })
+      this.connectAndPrepare(peripheral.id, 'FFE0', 'FFE1');
+    }
+  }
+
 
   connectAndPrepare = async (peripheral, service, characteristic) => {
     // Connect to device
@@ -79,16 +105,14 @@ class ReceiveTrash extends Component {
     // Close bluethooth connection
     this.closeBlE();
 
-    const peripheral = this.props.navigation.getParam('binId');
-    this.props.updatePointUser(peripheral);
+    const { peripheral } = this.state;
+    this.props.updatePointUser(peripheral.id);
     this.props.navigation.push('ReceiveSuccess');
   }
 
   closeBlE = () => {
-    const { navigation } = this.props;
-    const peripheral = navigation.getParam('binId');
-
-    BleManager.disconnect(peripheral);
+    const { peripheral } = this.state;
+    BleManager.disconnect(peripheral.id);
   }
 
   render() {
@@ -107,6 +131,9 @@ class ReceiveTrash extends Component {
         <Title>BIN IS READY</Title>
         <StyledText>Please put in the recyclable trash</StyledText>
         <Line />
+        {/* <TouchableHighlight onPress={this.startScan}>
+          <Title>SCAN</Title>
+        </TouchableHighlight> */}
         {(trashes.length == 0) ?
           <Image source={require('../../assets/logo.png')} /> :
           <View style={{ width: '100%', alignItems: 'center' }}>

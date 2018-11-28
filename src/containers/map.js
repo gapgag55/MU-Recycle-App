@@ -6,7 +6,6 @@ import MapView, { Marker } from 'react-native-maps';
 import { getBins } from '../actions/bins';
 
 import Point from '../components/point';
-// import bins from '../data/bins';
 import {
   StyledButtonBlack,
   StyledButtonText
@@ -58,8 +57,8 @@ class Map extends Component {
 
   render() {
     const {user, bins} = this.props;
-
     const {point} = user;
+
     return (
       <View
         style={styles.map}
@@ -70,7 +69,7 @@ class Map extends Component {
           <Point
             style={{ width: 30, height: 31 }}
             styleText={{ fontSize: 22 }}
-            text={point.toFixed(2)}
+            text={parseFloat(point).toFixed(2)}
           />
           <StyledButtonBlack
             onPress={this.transfer}

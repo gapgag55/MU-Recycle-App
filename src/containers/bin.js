@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Scanner from '../components/scanner';
 
 class Bin extends Component {
-  onRead = (binId) => {
-    this.props.navigation.navigate('ReceiveTrash', {binId});
+  onRead = (binName) => {
+    this.props.navigation.navigate('ReceiveTrash', {binName});
   }
 
   render() {

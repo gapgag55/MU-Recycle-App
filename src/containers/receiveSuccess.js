@@ -21,7 +21,7 @@ class ReceiveSuccess extends Component {
 
   render() {
     const { trashes } = this.props;
-    let point = 0;
+    let point = 0.00;
 
     if (trashes.length > 0) {
       for (let i = 0; i < trashes.length; i++) {
