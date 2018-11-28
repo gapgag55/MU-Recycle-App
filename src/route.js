@@ -37,8 +37,8 @@ const AuthStack = createStackNavigator({
     }),
   },
 }, {
-  initialRouteName: 'Login',
-});
+    initialRouteName: 'Login',
+  });
 
 const MapStack = createStackNavigator({
   Map,
@@ -46,11 +46,11 @@ const MapStack = createStackNavigator({
   TransferInput,
   TransferSuccess,
 }, {
-  initialRouteName: 'Map',
-  headerMode: 'none',
-});
+    initialRouteName: 'Map',
+    headerMode: 'none',
+  });
 
-const NewsStack =createStackNavigator({
+const NewsStack = createStackNavigator({
   News: {
     screen: News,
   },
@@ -58,9 +58,9 @@ const NewsStack =createStackNavigator({
     screen: ReadNew,
   }
 }, {
-  initialRouteName: 'News',
-  headerMode: 'none',
-})
+    initialRouteName: 'News',
+    headerMode: 'none',
+  })
 
 const BinStack = createStackNavigator({
   Bin: {
@@ -82,9 +82,9 @@ const BinStack = createStackNavigator({
     })
   },
 }, {
-  initialRouteName: 'Bin',
-  headerMode: 'none',
-});
+    initialRouteName: 'Bin',
+    headerMode: 'none',
+  });
 
 const TabNavigator = createBottomTabNavigator({
   Map: {
@@ -139,7 +139,7 @@ const TabNavigator = createBottomTabNavigator({
           iconName = "user"
         }
 
-        return <Icon name={iconName} size={27} color={tintColor} style={{marginBottom: 5}} />
+        return <Icon name={iconName} size={27} color={tintColor} style={{ marginBottom: 5 }} />
       },
     }),
     tabBarOptions: {
@@ -160,5 +160,5 @@ export default createAppContainer(createSwitchNavigator({
   AuthStack,
   TabNavigator
 }, {
-  initialRouteName: 'AuthLoading'
-}));
+    initialRouteName: 'AuthLoading'
+  }));

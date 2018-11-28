@@ -4,7 +4,7 @@ import {
   Image,
   NativeEventEmitter,
   NativeModules,
-  Vibration
+  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import Permissions from 'react-native-permissions'
@@ -36,52 +36,58 @@ class ReceiveTrash extends Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    BleManager.start({ showAlert: true });
 
     const peripheral = navigation.getParam('binId');
-
-    BleManager.connect(peripheral).then(() => {
-      console.log('Connected');
-      this.connectAndPrepare(peripheral, 'FFE0', 'FFE1');
-    });
+    this.connectAndPrepare(peripheral, 'FFE0', 'FFE1');
   }
 
   connectAndPrepare = async (peripheral, service, characteristic) => {
     // Connect to device
-    await BleManager.connect(peripheral);
+    await BleManager.connect(peripheral)
     // Before startNotification you need to call retrieveServices
     await BleManager.retrieveServices(peripheral)
     // To enable BleManagerDidUpdateValueForCharacteristic listener
     await BleManager.startNotification(peripheral, service, characteristic)
     // Add event listener
-    bleManagerEmitter.addListener(
+    this.handleUpdate = bleManagerEmitter.addListener(
       'BleManagerDidUpdateValueForCharacteristic',
       this.receiveTrashFromBluethooth
     );
   }
 
-  receiveTrashFromBluethooth = ({ value, peripheral, characteristic, service }) => {
-    if (value[0] != 10) {
+  receiveTrashFromBluethooth = ({ value }) => {
+    const preventValue = [10, 116, 78];
+
+    if (!preventValue.includes(value[0])) {
       const code = parseInt(bytesToString(value));
       this.props.addTrash(code);
-      Vibration.vibrate(10000);
     }
-  }
-
-  addToBin = () => {
-    this.props.addTrash(1); 
   }
 
   onClose = () => {
     // Close bluethooth connection
-    this.props.removeTrash();
+    this.closeBlE();
+
+    setTimeout(() => {
+      this.props.removeTrash();
+    }, 1000)
+
     this.props.navigation.navigate('Bin');
   }
 
   onConfirm = () => {
     // Close bluethooth connection
+    this.closeBlE();
+
     this.props.updatePointUser();
     this.props.navigation.push('ReceiveSuccess');
+  }
+
+  closeBlE = () => {
+    const { navigation } = this.props;
+    const peripheral = navigation.getParam('binId');
+
+    BleManager.disconnect(peripheral);
   }
 
   render() {
@@ -100,16 +106,13 @@ class ReceiveTrash extends Component {
         <Title>BIN IS READY</Title>
         <StyledText>Please put in the recyclable trash</StyledText>
         <Line />
-        {/* <TouchableHighlight onPress={this.addToBin}>
-          <Title>ADD TRASH</Title>
-        </TouchableHighlight> */}
         {(trashes.length == 0) ?
           <Image source={require('../../assets/logo.png')} /> :
           <View style={{ width: '100%', alignItems: 'center' }}>
             <Point
               style={{ width: 40, height: 41 }}
               styleText={{ fontSize: 32 }}
-              text={point.toPrecision(2)}
+              text={point.toFixed(2)}
             />
             <TrashList dataSource={trashes} />
             <Line />

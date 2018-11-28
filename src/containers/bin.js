@@ -3,7 +3,7 @@ import Scanner from '../components/scanner';
 
 class Bin extends Component {
   onRead = (binId) => {
-    this.props.navigation.push('ReceiveTrash', { binId });
+    this.props.navigation.navigate('ReceiveTrash', {binId});
   }
 
   render() {

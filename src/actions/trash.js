@@ -1,3 +1,4 @@
+import { Vibration } from 'react-native';
 import firebase from 'react-native-firebase';
 const database = firebase.database();
 
@@ -16,6 +17,8 @@ export function addTrash(code) {
       let trashes = snapshot.val();
       trashes = Object.keys(trashes).map((key) => { return trashes[key] });
       let addedTrash = trashes.filter(item => item.code == code);
+
+      if (addedTrash.length < 1) return;
 
       // 1. If not found trash -> addTrash
       // 2. If found, increase amount
@@ -38,6 +41,8 @@ export function addTrash(code) {
         type: ADD_TRASH,
         trashes: trashState
       });
+
+      Vibration.vibrate(10000);
     });
   }
 }

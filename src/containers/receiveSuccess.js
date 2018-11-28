@@ -38,7 +38,7 @@ class ReceiveSuccess extends Component {
         <Point
           style={{ width: 40, height: 41 }}
           styleText={{ fontSize: 32 }}
-          text={point}
+          text={point.toFixed(2)}
         />
         <TrashList dataSource={trashes} />
         <Line />

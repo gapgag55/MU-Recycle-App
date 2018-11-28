@@ -19,16 +19,37 @@ class Map extends Component {
     this.state = {
       point: 0,
       region: {
-        latitude: 13.7942812,
-        longitude: 100.3228156,
-        latitudeDelta: 0.0050,
-        longitudeDelta: 0.0050,
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0,
       },
     };
   }
 
   componentWillMount() {
     this.props.getBins();
+
+    navigator.geolocation.getCurrentPosition(
+      ({coords}) => {
+        this.setState({
+          region: {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            latitudeDelta: 0.0050,
+            longitudeDelta: 0.0050,
+          }
+        });
+      },
+      (error) => {
+        console.log(error)
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+  }
+
+  componentWillUnmount() {
+    console.log('Unmount');
   }
 
   onRegionChange = (region) => {

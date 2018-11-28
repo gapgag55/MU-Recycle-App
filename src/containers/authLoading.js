@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import BleManager from 'react-native-ble-manager';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -19,11 +20,14 @@ class AuthLoading extends Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
+    BleManager.start({ showAlert: true });
+
     const userId = await AsyncStorage.getItem('userId');
 
     // // Get User to Store
     if (userId)
       this.props.getUser();
+      
 
     this.props.navigation.navigate(userId ? 'TabNavigator' : 'AuthStack');
   };
