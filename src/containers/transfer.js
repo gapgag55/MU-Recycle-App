@@ -27,7 +27,7 @@ class Transfer extends Component {
       <View style={{height: '100%'}}>
         <Close
           onClose={this.onClose}
-          underlayColor={'#FFFFF00'}
+          underlayColor={'#FF00FF00'}
         />
         <Scanner onRead={this.onRead} />
       </View>

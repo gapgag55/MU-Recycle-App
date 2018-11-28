@@ -137,7 +137,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-view-shot')
     compile project(':react-native-ble-manager')
     compile project(':react-native-firebase')
     compile project(':react-native-gesture-handler')

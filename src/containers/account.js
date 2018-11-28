@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
 
@@ -29,8 +29,10 @@ class Account extends Component {
 
     return (
       <Container style={styles.container}>
-        <Title style={{fontSize: 30}}>{fullname}</Title>
-        <Text style={styles.text}>{email}</Text>
+        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <Title style={{fontSize: 30}}>{fullname}</Title>
+          <Text style={styles.text}>{email}</Text>
+        </View>
         <Line />
         <QRCode
           value={id}
@@ -53,7 +55,6 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 60,
     paddingBottom: 30,
-    justifyContent: 'space-between'
   },
   text: {
     fontFamily: 'Roboto-Regular'

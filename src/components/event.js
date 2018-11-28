@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableHighlight } from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Entypo';
-import ViewShot from "react-native-view-shot";
 
 import {
   StyledText
@@ -17,14 +16,13 @@ const StyledView = styled.View`
 `;
 
 class Event extends Component {
-
-  onTransfer = () => { }
+  onTransfer = () => {
+    this.props.navigation.navigate('TransferInput');
+  }
 
   onShare = () => { }
 
-  onSave = () => {
-    
-  }
+  onSave = () => { }
 
   render() {
     return (

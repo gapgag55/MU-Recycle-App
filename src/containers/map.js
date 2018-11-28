@@ -48,10 +48,6 @@ class Map extends Component {
     );
   }
 
-  componentWillUnmount() {
-    console.log('Unmount');
-  }
-
   onRegionChange = (region) => {
     this.setState({ region });
   }
