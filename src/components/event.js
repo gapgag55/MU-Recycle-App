@@ -22,7 +22,9 @@ class Event extends Component {
 
   onShare = () => { }
 
-  onSave = () => { }
+  onSave = () => {
+    
+  }
 
   render() {
     return (

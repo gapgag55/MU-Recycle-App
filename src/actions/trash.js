@@ -51,10 +51,11 @@ export function removeTrash() {
   return { type: REMOVE_TRASH };
 }
 
-export function updatePointUser() {
+export function updatePointUser(peripheral) {
   return (dispatch, getState) => {
     const { user, trashes } = getState();
     const userRef = database.ref(`/users/${user.id}`);
+    const binsRef = database.ref(`/bins`);
 
     let point = 0;
   
@@ -64,6 +65,38 @@ export function updatePointUser() {
 
     userRef.update({
       point: (parseFloat(user.point) + parseFloat(point)).toFixed(2)
+    });
+
+    binsRef.once('value', (snapshot) => {
+      let bins = snapshot.val();
+
+      for (var key in bins) {
+        if (bins[key].peripheral == peripheral) {
+          const bin =  database.ref(`/bins/${key}`)
+
+          navigator.geolocation.getCurrentPosition(
+            ({coords}) => {
+              bin.update({
+                latlng: {
+                  latitude: coords.latitude,
+                  longitude: coords.longitude
+                }
+              });
+
+              console.log('update')
+            },
+            (error) => {
+              console.log(error)
+            },
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+          );
+
+          // userRef.update({
+          //   point: (parseFloat(user.point) + parseFloat(point)).toFixed(2)
+          // });
+          break;
+        }
+      }
     });
   }
 }

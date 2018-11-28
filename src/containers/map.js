@@ -74,7 +74,7 @@ class Map extends Component {
           <Point
             style={{ width: 30, height: 31 }}
             styleText={{ fontSize: 22 }}
-            text={point}
+            text={point.toFixed(2)}
           />
           <StyledButtonBlack
             onPress={this.transfer}

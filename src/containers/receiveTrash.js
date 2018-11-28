@@ -79,7 +79,8 @@ class ReceiveTrash extends Component {
     // Close bluethooth connection
     this.closeBlE();
 
-    this.props.updatePointUser();
+    const peripheral = this.props.navigation.getParam('binId');
+    this.props.updatePointUser(peripheral);
     this.props.navigation.push('ReceiveSuccess');
   }
 
@@ -137,7 +138,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addTrash: (code) => dispatch(addTrash(code)),
   removeTrash: () => dispatch(removeTrash()),
-  updatePointUser: () => dispatch(updatePointUser())
+  updatePointUser: (peripheral) => dispatch(updatePointUser(peripheral))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiveTrash);
