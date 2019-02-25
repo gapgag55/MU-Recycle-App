@@ -49,7 +49,7 @@ class TransferInput extends Component {
           <Point
             style={{ width: 30, height: 31 }}
             styleText={{ fontSize: 22 }}
-            text={point.toFixed(2)}
+            text={point}
           />
         </View>
         <Line />
